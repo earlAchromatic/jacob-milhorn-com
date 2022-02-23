@@ -1,0 +1,18 @@
+{
+  "name": "jacob-milhorn-com",
+  "version": "1.0.0",
+  "description": "A splendid starter for my Slinkity site!",
+  "main": ".eleventy.js",
+  "scripts": {
+    "dev": "slinkity --serve --incremental",
+    "start": "slinkity --serve --incremental",
+    "build": "slinkity"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^1.0.0",
+    "@slinkity/renderer-vue": "^0.1.6",
+    "sass": "^1.49.8",
+    "slinkity": "^0.6.1",
+    "vue": "^3.2.31"
+  }
+}
