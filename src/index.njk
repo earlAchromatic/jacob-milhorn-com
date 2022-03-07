@@ -5,5 +5,11 @@ layout: layouts/base.njk
 
 
 
-{% component './components/header.vue', hydrate='eager'%}
-{% component './components/colorChanger.vue', hydrate='lazy' %}
+
+
+{% component 'components/welcomeMat.vue'%}
+
+
+{% slottedComponent 'components/section.vue' %}
+    {% component 'components/postsGrid.vue', posts=collections.posts %}
+{% endslottedComponent %}

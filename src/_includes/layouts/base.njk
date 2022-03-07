@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class='HC'>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -30,9 +30,28 @@
       as="font"
       type="font/woff2"
       crossorigin="anonymous">
+
       <link rel="stylesheet" href="/@root/styles/style.sass"> {{ __slinkity.head | safe }}
+       <link href="/@root/styles/prism-theme.css" rel="stylesheet">
+
 </head>
-<body>
-    {{content | safe}}
+<body >
+
+{% component 'components/header.vue', hydrate='lazy'%}
+  <div class="center">
+  {{content | safe}}
+  </div>
+    
+<script type="module" src="/@root/scripts/highContrast.js"></script>
+<script type="module">
+  import {addProperties} from "/@root/scripts/color.js"
+  window.addEventListener("DOMContentLoaded", ()=>{
+    let myStorage = window.localStorage;
+    let colors = JSON.parse(myStorage.getItem('color'));
+    console.log(colors);
+    addProperties(colors);
+  })
+
+</script>
 </body>
 </html>

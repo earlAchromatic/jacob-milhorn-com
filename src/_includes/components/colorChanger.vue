@@ -1,14 +1,16 @@
 <template>
   <div>
-    <button @click="setColorArray(colors[0].multiorange, colorString)">
+    <button @click="setColorArray(colors[0].ghost, colorString)">Ghost</button>
+    <button @click="setColorArray(colors[1].white, colorString)">White</button>
+    <button @click="setColorArray(colors[2].multiorange, colorString)">
       Multi
     </button>
-    <button @click="setColorArray(colors[1].greens, colorString)">Green</button>
-    <button @click="setColorArray(colors[2].yellows, colorString)">
+    <button @click="setColorArray(colors[3].greens, colorString)">Green</button>
+    <button @click="setColorArray(colors[4].yellows, colorString)">
       Yellow
     </button>
-    <button @click="setColorArray(colors[3].darks, colorString)">Dark</button>
-    <button @click="setColorArray(colors[4].purples, colorString)">Teal</button>
+    <button @click="setColorArray(colors[5].darks, colorString)">Dark</button>
+    <button @click="setColorArray(colors[6].purples, colorString)">Teal</button>
     <button @click="currentColor = invertStyleArray(currentColor, colorString)">
       Invert
     </button>
@@ -17,12 +19,53 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { onActivated, onMounted, ref, watch } from 'vue';
+
+import triggerContrast from '/@root/scripts/highContrast.js';
+import { addProperties } from '/@root/scripts/color.js';
+
+onMounted(() => {
+  // els = [...document.querySelectorAll('.HC')]; // get all HC elements (high contrasts)
+  // console.log(els);
+  myStorage = window.localStorage;
+});
+
+let els = [];
 const currentColor = ref([]);
+
+let myStorage;
 
 const colorString = '--color-';
 
 const colors = [
+  {
+    ghost: [
+      '#000000ff',
+      '#00000000',
+      '#00000000',
+      '#00000000',
+      '#00000000',
+      '#00000000',
+      '#ffffffff',
+      '#00000000',
+      '#00000000',
+      '#00000000',
+    ],
+  },
+  {
+    white: [
+      '#ffffffff',
+      '#ffffffff',
+      '#ffffffff',
+      '#FF0000ff',
+      '#ffffffff',
+      '#ffffffff',
+      '#000000ff',
+      '#ffffffff',
+      '#ffffffff',
+      '#ffffffff',
+    ],
+  },
   {
     multiorange: [
       '#54478cff',
@@ -95,7 +138,18 @@ const colors = [
   },
 ];
 
-watch(currentColor, (val) => addProperties(val));
+watch(currentColor, (val) => {
+  addProperties(val);
+  triggerContrast(els);
+  saveStateLocally();
+});
+
+const saveStateLocally = () => {
+  if (myStorage) {
+    myStorage.setItem('color', JSON.stringify(currentColor.value));
+    console.log(JSON.parse(myStorage.getItem('color')));
+  }
+};
 
 const setColorArray = (colors, code) => {
   currentColor.value = makeStyleArray(colors, code);
@@ -104,13 +158,6 @@ const setColorArray = (colors, code) => {
 const makeStyleArray = (colorArray, code) => {
   return colorArray.map((e, i) => {
     return code + i + ': ' + e;
-  });
-};
-
-const addProperties = (styleArray) => {
-  let root = document.documentElement;
-  styleArray.forEach((e) => {
-    root.style.setProperty(e.split(':')[0], e.split(':')[1]);
   });
 };
 
@@ -124,28 +171,27 @@ const invertStyleArray = (colorArray, code) => {
 const resetSVG = (hexColor) => {
   let rand = Math.floor(Math.random() * 16777215).toString(16);
   rand = '#' + rand;
-  console.log(rand);
-  let root = document.documentElement;
-  let bg = window.getComputedStyle(root).backgroundImage;
+
+  let root = document.querySelector('.block');
+  let bg = window.getComputedStyle(root).background;
 
   bg = bg.split('),')[0] + ')';
-  console.log(bg);
+
   let search = new RegExp(/fill=\'.*?\'/g);
   bg = bg.replace(search, `fill='${rand.replace('#', '%23')}'`);
 
-  console.log(bg);
-  let el = document.querySelector('html');
-  el.style.setProperty(
-    'background',
-    bg + ', linear-gradient(var(--primary), var(--color-5))'
-  );
-  let a = window.getComputedStyle(el).background;
-  console.log(a);
+  let el = document.querySelectorAll('.block');
+  console.log(el);
+  el.forEach((e, i) => {
+    e.style.setProperty('background', bg + `, var(--color-${e.length - i}`);
+
+    e.style.setProperty('background-position-x', `${i * 30}px`);
+    console.log(e.style.background);
+  });
 };
 </script>
 
 <style lang="sass" scoped>
-div
-    position: fixed
-    top: 10rem
+button
+    background: var(--primary)
 </style>

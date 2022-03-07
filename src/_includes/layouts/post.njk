@@ -1,0 +1,13 @@
+---
+layout: layouts/base.njk
+---
+
+{% slottedComponent './components/postPlatform.vue' %}
+
+  {{content | safe}}
+   
+
+{% endslottedComponent %}
+
+
+{% component 'components/postsGrid.vue', posts=collections.posts %}

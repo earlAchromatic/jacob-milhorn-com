@@ -23,10 +23,10 @@
     --color-0: white
     --color-1: white
     --color-2: white
-    --color-3: black
+    --color-3: red
     --color-4: white
     --color-5: white
-    --color-6: white
+    --color-6: black
     --color-7: white  
     --color-8: white
     --color-9: white    
@@ -97,12 +97,14 @@ html, body
 
 html
     
-    background: var(--bg), linear-gradient(var(--primary), var(--color-5))
-  
+    
+    
+
+
 
 body
-    overflow: auto
-    overflow-x: hidden
+   overflow: auto
+   overflow-x: hidden 
 
 img
     width: 100%
@@ -115,6 +117,7 @@ section
 
 button
     cursor: pointer
+    
 
 strong
     font-weight: 800
@@ -204,6 +207,13 @@ nav
     overflow-y: scroll
     padding: 1rem
 
+.button
+    background: var(--color-5)
+    border: 3px solid var(--color-9)
+    padding-right: 1rem
+    padding-left: 1rem
+    text-align: center
+
 
 @media screen and ( max-width: 800px )
     #message
@@ -213,7 +223,11 @@ nav
     nav
         .groovy
             font-size: 3rem
-
+    .wrap
+        .blocks .block
+            width: 1rem
+            height: 1rem
+       
 #blob
     top: 9rem
     left: 0rem
@@ -249,3 +263,18 @@ sidebar-l[row-reverse]>*
     box-shadow: var(--box-shadow)
 .shadow-2
     box-shadow: var(--box-shadow-lifted)
+
+
+pre
+    padding: 2rem
+    border: 1px var(--color-9) solid
+    box-shadow: var(--box-shadow)
+
+
+.center
+    display: flex
+    align-items: center
+    flex-direction: column
+    background: linear-gradient(var(--primary), var(--color-5))
+    background-attachment: fixed
+    background-repeat: no-repeat

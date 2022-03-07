@@ -5,14 +5,20 @@
   "main": ".eleventy.js",
   "scripts": {
     "dev": "slinkity --serve --incremental",
-    "start": "slinkity --serve --incremental",
+    "start": "slinkity --watch --incremental",
     "build": "slinkity"
   },
   "devDependencies": {
     "@11ty/eleventy": "^1.0.0",
+    "@11ty/eleventy-plugin-syntaxhighlight": "^4.0.0",
     "@slinkity/renderer-vue": "^0.1.6",
     "sass": "^1.49.8",
     "slinkity": "^0.6.1",
     "vue": "^3.2.31"
+  },
+  "dependencies": {
+    "@vueuse/core": "^7.6.2",
+    "@vueuse/sound": "^1.1.7",
+    "vite": "^2.8.6"
   }
 }

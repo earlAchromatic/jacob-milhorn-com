@@ -71,10 +71,7 @@ function updateContrastEls(els) {
   });
 }
 
-export default function triggerContrast() {
-  setTimeout(() => window.updateContrastEls(window.els), 200);
+export default function triggerContrast(els) {
+  setTimeout(() => updateContrastEls(els), 200);
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-  window.els = document.querySelectorAll('.HC'); // get all HC elements (high contrasts)
-});
