@@ -60,10 +60,17 @@ const onAfterEnter = (env) => {
     justify-content: center
     flex-wrap: nowrap
     margin-left: 3rem
-    backdrop-filter: blur(10px)
+    backdrop-filter: blur(10px) hue-rotate(45deg)
     clip-path: polygon(25px 0%, 100% 0%, 100% 100%, 25px 100%, 0 50%)
     &>*
+        button
+          font-size: 0.8rem
         margin-left: -3rem
+        display: flex
+        flex-wrap: wrap
+        align-content: space-around
+        flex-direction: column
+        justify-content: space-evenly
 /* we will explain what these classes do next! */
 .slide-enter-active,
 .slide-leave-active

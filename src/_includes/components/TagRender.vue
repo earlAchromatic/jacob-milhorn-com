@@ -1,6 +1,6 @@
 <template>
   <div class="tags">
-    <span class="tag" v-for="tag in tags.filter((tag) => tag != 'posts')">{{
+    <span class="mytag" v-for="tag in tags.filter((tag) => tag != 'posts')">{{
       tag.name
     }}</span>
   </div>

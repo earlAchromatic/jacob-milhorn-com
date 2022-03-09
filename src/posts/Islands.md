@@ -11,8 +11,6 @@ excerpt: I use 11ty for 90% of my web projects. the reason is, I run a web agenc
 
 Curious about the new buzzword making rounds recently?
 
-![](/images/404.svg)
-
 Islands architecture is a way of combining traditional, statically generated websites with the more modern SPA approach. When working together, the SPA-style 'app' is no longer in control of the entire site and all the routes, but is merely an 'island' of interactivity that exists on the page.
 
 By using the two concepts harmoniously, we can create both extremely performant and rich-as-ever user experiences. Let's dig a bit deeper into the problems island architecture solves and how it solves them.

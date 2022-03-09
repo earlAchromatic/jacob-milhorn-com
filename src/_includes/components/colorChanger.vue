@@ -1,20 +1,30 @@
 <template>
   <div>
-    <button @click="setColorArray(colors[0].ghost, colorString)">Ghost</button>
-    <button @click="setColorArray(colors[1].white, colorString)">White</button>
+    <button @click="setColorArray(colors[0].ghost, colorString)">
+      Monochrome
+    </button>
+    <button @click="setColorArray(colors[1].white, colorString)">
+      Baseline
+    </button>
     <button @click="setColorArray(colors[2].multiorange, colorString)">
-      Multi
+      Jacob's Choice
     </button>
-    <button @click="setColorArray(colors[3].greens, colorString)">Green</button>
+    <button @click="setColorArray(colors[3].greens, colorString)">
+      Tractor
+    </button>
     <button @click="setColorArray(colors[4].yellows, colorString)">
-      Yellow
+      Gas Giant
     </button>
-    <button @click="setColorArray(colors[5].darks, colorString)">Dark</button>
-    <button @click="setColorArray(colors[6].purples, colorString)">Teal</button>
+    <button @click="setColorArray(colors[5].darks, colorString)">Deep</button>
+    <button @click="setColorArray(colors[6].purples, colorString)">
+      Tonic
+    </button>
+    <button @click="setColorArray(colors[7].blue, colorString)">Iceberg</button>
+    <button @click="setColorArray(colors[8].sand, colorString)">Sand</button>
     <button @click="currentColor = invertStyleArray(currentColor, colorString)">
       Invert
     </button>
-    <button @click="resetSVG('#FF0000')">bg</button>
+    <!-- <button @click="resetSVG('#FF0000')">bg</button> -->
   </div>
 </template>
 
@@ -50,7 +60,7 @@ const colors = [
       '#ffffffff',
       '#00000000',
       '#00000000',
-      '#00000000',
+      '#a4a4a4e0',
     ],
   },
   {
@@ -61,24 +71,25 @@ const colors = [
       '#FF0000ff',
       '#ffffffff',
       '#ffffffff',
-      '#000000ff',
+      '#353535e8',
       '#ffffffff',
       '#ffffffff',
       '#ffffffff',
     ],
   },
+
   {
     multiorange: [
-      '#54478cff',
-      '#2c699aff',
-      '#048ba8ff',
-      '#0db39eff',
-      '#16db93ff',
-      '#83e377ff',
-      '#b9e769ff',
-      '#efea5aff',
-      '#f1c453ff',
       '#f29e4cff',
+      '#f1c453ff',
+      '#efea5aff',
+      '#b9e769ff',
+      '#83e377ff',
+      '#16db93ff',
+      '#0db39eff',
+      '#048ba8ff',
+      '#2c699aff',
+      '#54478cff',
     ],
   },
   {
@@ -137,6 +148,34 @@ const colors = [
       '#80ffdbff',
     ],
   },
+  {
+    blue: [
+      '#E3F2FD',
+      '#BBDEFB',
+      '#90CAF9',
+      '#64B5F6',
+      '#42A5F5',
+      '#2196F3',
+      '#1E88E5',
+      '#1976D2',
+      '#1565C0',
+      '#0D47A1',
+    ],
+  },
+  {
+    sand: [
+      '#CCD5AE',
+      '#DBE1BC',
+      '#E9EDC9',
+      '#F4F4D5',
+      '#FEFAE0',
+      '#FCF4D7',
+      '#FAEDCD',
+      '#E7C8A0',
+      '#DEB68A',
+      '#D4A373',
+    ],
+  },
 ];
 
 watch(currentColor, (val) => {
@@ -193,5 +232,10 @@ const resetSVG = (hexColor) => {
 
 <style lang="sass" scoped>
 button
-    background: var(--primary)
+    background: transparent
+    border: none
+    margin-right: 0.5rem
+    &:hover
+      background: var(--primary)
+      color: #cbcbcb
 </style>

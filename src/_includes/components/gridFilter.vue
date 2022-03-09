@@ -1,7 +1,7 @@
 <template>
   <div class="tags">
     <div
-      class="tag"
+      class="mytag"
       v-for="tag in includedTags"
       @click="changeInclude(tag)"
       :class="{ notIncluded: !tag.include }"
@@ -68,6 +68,6 @@ includedTags.value = props.tags
         border-radius: 1.5rem
         padding: .5rem
     .notIncluded
-        filter: saturate(25%)
+        filter: saturate(25%) brightness(0.5)
         color: var(--color-4)
 </style>
