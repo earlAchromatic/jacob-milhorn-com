@@ -33,9 +33,13 @@
 
       <link rel="stylesheet" href="/@root/styles/style.sass"> {{ __slinkity.head | safe }}
        <link href="/@root/styles/prism-theme.css" rel="stylesheet">
-
+<style>
+      body[dsd-pending] {
+        display: none;
+      }
+    </style>
 </head>
-<body >
+<body dsd-pending>
 
 {% component 'components/header.vue'%}
 {% component 'components/marqueeBar.vue', hydrate='eager'%}
@@ -46,12 +50,12 @@
 <script type="module" src="/@root/scripts/highContrast.js"></script>
 <script type="module">
   import {addProperties} from "/@root/scripts/color.js"
-  window.addEventListener("DOMContentLoaded", ()=>{
+  
     let myStorage = window.localStorage;
     let colors = JSON.parse(myStorage.getItem('color'));
     
     addProperties(colors);
-  })
+    document.body.removeAttribute('dsd-pending');
 
 </script>
 </body>
