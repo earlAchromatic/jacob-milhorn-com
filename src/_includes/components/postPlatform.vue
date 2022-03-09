@@ -79,7 +79,7 @@ console.log(props);
 figure
     padding: 1rem
     img
-        width: 25rem
+        max-width: 25rem
         margin: 0 auto
         box-shadow: var(--box-shadow)
 .blocks
