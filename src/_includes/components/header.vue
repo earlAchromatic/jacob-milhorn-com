@@ -1,10 +1,9 @@
 <template>
   <nav>
-    <div class="wrap">
+    <div class="headwrap">
       <h1 class="groovy">JacobMilhorn.com</h1>
     </div>
   </nav>
-  <marqueeBar />
 </template>
 
 <script setup>
@@ -23,7 +22,7 @@ nav
     display: flex
     justify-content: center
 
-.wrap
+.headwrap
   width: 100%
   height: 100%
 

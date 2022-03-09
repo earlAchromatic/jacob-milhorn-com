@@ -13,6 +13,21 @@
     </div>
     <div class="platform">
       <slot></slot>
+      <hr />
+      <h2>Comments</h2>
+      <p>
+        I'm always open to thoughts on the subject matter, new ideas, relevant
+        criticisms, and different ways of looking at things. Have one of these?
+        Write it in the comments below.
+      </p>
+      <div
+        id="cusdis_thread"
+        data-host="https://cusdis.com"
+        data-app-id="d35a22ce-787d-431e-8b9b-92e7d415787f"
+        data-page-id="{{ PAGE_ID }}"
+        data-page-url="{{ PAGE_URL }}"
+        data-page-title="{{ PAGE_TITLE }}"
+      ></div>
     </div>
 
     <div class="blocks">
@@ -35,6 +50,20 @@ const nums = ref(9);
 </script>
 
 <style lang="sass">
+#cusdis_thread
+  bottom: 0
+  position: relative
+  clip-path: inset(0 0 3% 0)
+  max-width: var(--measure)
+  iframe
+    box-shadow: none
+
+    border-radius: 0
+    left: 0
+    position: relative
+    .underline
+      display: none
+
 .platform
   margin: 0 auto
   width: 70vw
@@ -45,11 +74,12 @@ const nums = ref(9);
 .wrap
   display: flex
   flex-direction: row
-
+  width: 90vw
 
 figure
     padding: 1rem
     img
+        width: 25rem
         margin: 0 auto
         box-shadow: var(--box-shadow)
 .blocks
@@ -62,7 +92,7 @@ figure
   .block
     width: 5rem
     height: 5rem
-    margin: 2rem
+    margin: 2rem auto
     //box-shadow: var(--box-shadow)
 
   .block

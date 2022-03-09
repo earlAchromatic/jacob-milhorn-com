@@ -1,5 +1,5 @@
 ---
-tags: posts
+tags: ['posts', 'architecture', 'ssg']
 title: Islands Architecture and the real MVP
 layout: layouts/post.njk
 excerpt: I use 11ty for 90% of my web projects. the reason is, I run a web agency that caters to small business. Although I could just as quickly whip up an app like experience using vue, (in some cases maybe quicker) I tend to reach for 11ty because static sites are extremely snappy, great for seo and performance, and user experience and are easily interactive enough for business marketing websites.
@@ -10,6 +10,8 @@ excerpt: I use 11ty for 90% of my web projects. the reason is, I run a web agenc
 ## What is Islands?
 
 Curious about the new buzzword making rounds recently?
+
+![](/images/404.svg)
 
 Islands architecture is a way of combining traditional, statically generated websites with the more modern SPA approach. When working together, the SPA-style 'app' is no longer in control of the entire site and all the routes, but is merely an 'island' of interactivity that exists on the page.
 

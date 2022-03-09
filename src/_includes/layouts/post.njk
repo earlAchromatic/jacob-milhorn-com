@@ -1,5 +1,6 @@
 ---
 layout: layouts/base.njk
+
 ---
 
 {% slottedComponent './components/postPlatform.vue' %}
@@ -9,5 +10,25 @@ layout: layouts/base.njk
 
 {% endslottedComponent %}
 
+{% set postDat %}
+[
+{% for post in collections.posts %}
+{"title": "{{post.data.title}}", 
+  "url": "{{post.url}}", 
+  "excerpt": "{{post.data.excerpt}}", 
+  "tags":[ {% for tag in post.data.tags %}
+    "{{tag}}" 
+    {% if not loop.last %},{% endif %}
+  {% endfor %}]}
+{% if not loop.last %}
+,
+{% endif %}
+{% endfor %}
+]
+{% endset %}
 
-{% component 'components/postsGrid.vue', posts=collections.posts %}
+
+
+{% component 'components/postsGrid.vue', posts=postDat, hydrate="lazy" %}
+
+<script async defer src="https://cusdis.com/js/cusdis.es.js"></script>

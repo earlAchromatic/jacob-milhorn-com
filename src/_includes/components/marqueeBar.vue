@@ -1,13 +1,11 @@
 <template>
   <div class="mother">
-    <Transition @enter="onAfterEnter">
+    <Transition name="slide" @enter="onAfterEnter">
       <div id="generated" v-if="show">
-        <keep-alive>
-          <colorChanger />
-        </keep-alive></div
+        <colorChanger /></div
     ></Transition>
 
-    <div id="generator" @click="show = !show">
+    <div id="generator" @click="showit">
       <img v-show="!show" src="/images/holo-off.png" alt="" />
       <img v-show="show" src="/images/holo-on.png" alt="" />
     </div>
@@ -19,6 +17,11 @@ import { ref } from 'vue';
 import colorChanger from './colorChanger.vue';
 
 const show = ref(false);
+
+const showit = () => {
+  show.value = !show.value;
+  console.log('showing');
+};
 
 const onAfterEnter = (env) => {
   env.style.width = '100%';
@@ -62,13 +65,13 @@ const onAfterEnter = (env) => {
     &>*
         margin-left: -3rem
 /* we will explain what these classes do next! */
-.v-enter-active,
-.v-leave-active
+.slide-enter-active,
+.slide-leave-active
   transition: all 0.5s ease
   width: 100%
 
-.v-enter-from,
-.v-leave-to
+.slide-enter-from,
+.slide-leave-to
   width: 0!important
   opacity: 0
 

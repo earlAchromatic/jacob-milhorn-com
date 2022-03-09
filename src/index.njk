@@ -9,7 +9,18 @@ layout: layouts/base.njk
 
 {% component 'components/welcomeMat.vue'%}
 
+{% set postDat %}
+[
+{% for post in collections.posts %}
+{"title": "{{post.data.title}}", "url": "{{post.url}}", "excerpt": "{{post.data.excerpt}}", "tags":[ {% for tag in post.data.tags %}"{{tag}}" {% if not loop.last %},{% endif %} {% endfor %}]}
+{% if not loop.last %}
+,
+{% endif %}
+{% endfor %}
+]
+{% endset %}
 
-{% slottedComponent 'components/section.vue' %}
-    {% component 'components/postsGrid.vue', posts=collections.posts %}
+
+{% slottedComponent 'components/section.vue'%}
+    {% component 'components/postsGrid.vue', posts=postDat, hydrate="lazy" %}
 {% endslottedComponent %}

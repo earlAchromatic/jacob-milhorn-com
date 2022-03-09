@@ -37,7 +37,8 @@
 </head>
 <body >
 
-{% component 'components/header.vue', hydrate='lazy'%}
+{% component 'components/header.vue'%}
+{% component 'components/marqueeBar.vue', hydrate='eager'%}
   <div class="center">
   {{content | safe}}
   </div>
@@ -48,7 +49,7 @@
   window.addEventListener("DOMContentLoaded", ()=>{
     let myStorage = window.localStorage;
     let colors = JSON.parse(myStorage.getItem('color'));
-    console.log(colors);
+    
     addProperties(colors);
   })
 

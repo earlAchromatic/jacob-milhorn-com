@@ -1,7 +1,7 @@
 ---
 layout: layouts/post.njk
 title: flash-of-unstyled-content for web components
-tags: posts
+tags: ['posts', 'web-component']
 excerpt: I use 11ty for 90% of my web projects. the reason is, I run a web agency that caters to small business. Although I could just as quickly whip up an app like experience using vue, (in some cases maybe quicker) I tend to reach for 11ty because static sites are extremely snappy, great for seo and performance, and user experience and are easily interactive enough for business marketing websites.
 ---
 

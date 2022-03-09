@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import { onActivated, onMounted, ref, watch } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 
 import triggerContrast from '/@root/scripts/highContrast.js';
 import { addProperties } from '/@root/scripts/color.js';
@@ -28,6 +28,7 @@ onMounted(() => {
   // els = [...document.querySelectorAll('.HC')]; // get all HC elements (high contrasts)
   // console.log(els);
   myStorage = window.localStorage;
+  currentColor.value = JSON.parse(myStorage.getItem('color'));
 });
 
 let els = [];
@@ -147,7 +148,6 @@ watch(currentColor, (val) => {
 const saveStateLocally = () => {
   if (myStorage) {
     myStorage.setItem('color', JSON.stringify(currentColor.value));
-    console.log(JSON.parse(myStorage.getItem('color')));
   }
 };
 
