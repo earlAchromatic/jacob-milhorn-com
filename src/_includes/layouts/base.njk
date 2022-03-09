@@ -53,8 +53,9 @@
   
     let myStorage = window.localStorage;
     let colors = JSON.parse(myStorage.getItem('color'));
-    
-    addProperties(colors);
+    if (colors) {
+     addProperties(colors); 
+    } 
     document.body.removeAttribute('dsd-pending');
 
 </script>
