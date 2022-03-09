@@ -3,7 +3,7 @@ layout: layouts/base.njk
 
 ---
 
-{% slottedComponent './components/postPlatform.vue' %}
+{% slottedComponent './components/postPlatform.vue', postUrl=page.url  %}
 
   {{content | safe}}
    

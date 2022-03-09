@@ -24,9 +24,7 @@
         id="cusdis_thread"
         data-host="https://cusdis.com"
         data-app-id="d35a22ce-787d-431e-8b9b-92e7d415787f"
-        data-page-id="{{ PAGE_ID }}"
-        data-page-url="{{ PAGE_URL }}"
-        data-page-title="{{ PAGE_TITLE }}"
+        :data-page-id="postUrl"
       ></div>
     </div>
 
@@ -47,6 +45,8 @@
 <script setup>
 import { ref } from 'vue';
 const nums = ref(9);
+const props = defineProps(['postUrl']);
+console.log(props);
 </script>
 
 <style lang="sass">
