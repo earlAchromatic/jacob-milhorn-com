@@ -12,6 +12,8 @@
     "@11ty/eleventy": "^1.0.0",
     "@11ty/eleventy-plugin-syntaxhighlight": "^4.0.0",
     "@slinkity/renderer-vue": "^0.1.6",
+    "@tryghost/content-api": "^1.6.3",
+    "dotenv": "^16.0.0",
     "sass": "^1.49.8",
     "slinkity": "^0.6.1",
     "vue": "^3.2.31"

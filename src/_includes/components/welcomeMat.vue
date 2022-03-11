@@ -2,9 +2,15 @@
   <div class="mat HC">
     <img src="/images/letter-j.svg" alt="" />
     <p>
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odit nam ad
-      explicabo aperiam laborum harum placeat nisi tenetur obcaecati officia
-      deleniti sit ipsam quisquamimi temporibus nemo delectus dolor?
+      Hey there, I'm Jacob. I am a software engineer, creator, and designer.
+    </p>
+    <p>
+      Thanks for visiting my personal site. It's a place where I experiment with
+      ideas and technology and ramble on about a few topics I care about.
+    </p>
+    <p>
+      Want to get in touch? jacob@hyperionweb.dev | 740-641-7921 |
+      github.com/earlAchromatic
     </p>
   </div>
 </template>

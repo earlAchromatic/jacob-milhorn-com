@@ -53,9 +53,10 @@ const colorNum = ref(9);
 
 const props = defineProps(['posts']);
 
-let propsJSON = props.posts.replace('\n', '');
-propsJSON = JSON.parse(propsJSON);
+let propsJSON = props.posts.replace(/\n/g, '');
+// let propsJSON = JSON.stringify(props.posts).replace(/\\n/g, '');
 
+propsJSON = JSON.parse(propsJSON);
 const tags = ref([]);
 propsJSON.forEach((post) => {
   post.tags

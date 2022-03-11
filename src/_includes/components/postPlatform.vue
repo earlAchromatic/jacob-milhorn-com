@@ -46,7 +46,6 @@
 import { ref } from 'vue';
 const nums = ref(9);
 const props = defineProps(['postUrl']);
-console.log(props);
 </script>
 
 <style lang="sass">

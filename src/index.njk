@@ -9,18 +9,22 @@ layout: layouts/base.njk
 
 {% component 'components/welcomeMat.vue'%}
 
-{% set postDat %}
+
+
+{% set postDat -%}
 [
 {% for post in collections.posts %}
-{"title": "{{post.data.title}}", "url": "{{post.url}}", "excerpt": "{{post.data.excerpt}}", "tags":[ {% for tag in post.data.tags %}"{{tag}}" {% if not loop.last %},{% endif %} {% endfor %}]}
+{"title": "{{post.title}}", "url": "{{post.url}}", "excerpt": "{{post.excerpt | safe }}", "tags":[ {% for tag in post.tags %}"{{tag}}" {% if not loop.last %},{% endif %} {% endfor %}]}
 {% if not loop.last %}
 ,
 {% endif %}
 {% endfor %}
 ]
-{% endset %}
+{%- endset %}
 
 
-{% slottedComponent 'components/section.vue'%}
+
+
+{% slottedComponent 'components/section.vue' %}
     {% component 'components/postsGrid.vue', posts=postDat, hydrate="lazy" %}
 {% endslottedComponent %}

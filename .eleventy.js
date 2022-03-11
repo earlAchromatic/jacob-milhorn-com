@@ -1,4 +1,16 @@
 const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
+const ghostContentAPI = require('@tryghost/content-api');
+require('dotenv').config();
+
+const api = new ghostContentAPI({
+  url: process.env.GHOST_API_URL,
+  key: process.env.GHOST_CONTENT_API_KEY,
+  version: 'v2',
+});
+
+const stripDomain = (url, precursor = '') => {
+  return url.replace(process.env.GHOST_API_URL, precursor);
+};
 
 module.exports = function (eleventyConfig) {
   /**
@@ -8,6 +20,28 @@ module.exports = function (eleventyConfig) {
    * This tool encourages a /public directory for your static assets like social images
    * To ensure this directory is discoverable by Vite, we copy it to our 11ty build output like so:
    */
+  eleventyConfig.addCollection('posts', async function (collection) {
+    collection = await api.posts
+      .browse({
+        include: 'tags,authors',
+        limit: 'all',
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+
+    collection.forEach((post) => {
+      post.url = stripDomain(post.url, '/posts');
+      post.primary_author.url = stripDomain(post.primary_author.url, '/posts');
+      post.tags = post.tags.map((tag) => tag.name);
+
+      // Convert publish date into a Date object
+      post.published_at = new Date(post.published_at);
+    });
+
+    return collection;
+  });
+
   eleventyConfig.addPlugin(syntaxHighlight);
   eleventyConfig.addPassthroughCopy('public');
 
