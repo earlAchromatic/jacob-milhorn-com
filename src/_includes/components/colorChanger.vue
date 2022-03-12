@@ -39,6 +39,7 @@ onMounted(() => {
   // console.log(els);
   myStorage = window.localStorage;
   currentColor.value = JSON.parse(myStorage.getItem('color'));
+  currentColor.value = currentColor.value ?? colors[1].white;
 });
 
 let els = [];

@@ -1,5 +1,6 @@
 const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
 const ghostContentAPI = require('@tryghost/content-api');
+const { JSDOM } = require('jsdom');
 require('dotenv').config();
 
 const api = new ghostContentAPI({
@@ -13,6 +14,7 @@ const stripDomain = (url, precursor = '') => {
 };
 
 module.exports = function (eleventyConfig) {
+  eleventyConfig.addPlugin(syntaxHighlight);
   /**
    * Why copy the /public directory?
    *
@@ -42,7 +44,23 @@ module.exports = function (eleventyConfig) {
     return collection;
   });
 
-  eleventyConfig.addPlugin(syntaxHighlight);
+  eleventyConfig.addNunjucksFilter('updatePretagSyntaxHighlight', (html) => {
+    let dom = new JSDOM(html);
+    const codeEls = dom.window.document.querySelectorAll('code');
+
+    Object.entries(codeEls).forEach((codeTag) => {
+      //console.log(codeTag[1].parentElement.tagName);
+      if (codeTag[1].parentElement.tagName === 'PRE') {
+        let parentPre = codeTag[1].parentElement;
+        let codeTagClass = codeTag[1].className;
+        console.log(codeTagClass);
+        parentPre.setAttribute('class', codeTagClass);
+      }
+    });
+
+    return dom.serialize();
+  });
+
   eleventyConfig.addPassthroughCopy('public');
 
   return {
