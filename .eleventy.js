@@ -44,22 +44,22 @@ module.exports = function (eleventyConfig) {
     return collection;
   });
 
-  eleventyConfig.addNunjucksFilter('updatePretagSyntaxHighlight', (html) => {
-    let dom = new JSDOM(html);
-    const codeEls = dom.window.document.querySelectorAll('code');
+  // eleventyConfig.addNunjucksFilter('updatePretagSyntaxHighlight', (html) => {
+  //   let dom = new JSDOM(html);
+  //   const codeEls = dom.window.document.querySelectorAll('code');
 
-    Object.entries(codeEls).forEach((codeTag) => {
-      //console.log(codeTag[1].parentElement.tagName);
-      if (codeTag[1].parentElement.tagName === 'PRE') {
-        let parentPre = codeTag[1].parentElement;
-        let codeTagClass = codeTag[1].className;
-        console.log(codeTagClass);
-        parentPre.setAttribute('class', codeTagClass);
-      }
-    });
+  //   Object.entries(codeEls).forEach((codeTag) => {
+  //     //console.log(codeTag[1].parentElement.tagName);
+  //     if (codeTag[1].parentElement.tagName === 'PRE') {
+  //       let parentPre = codeTag[1].parentElement;
+  //       let codeTagClass = codeTag[1].className;
+  //       console.log(codeTagClass);
+  //       parentPre.setAttribute('class', codeTagClass);
+  //     }
+  //   });
 
-    return dom.serialize();
-  });
+  //   return dom.serialize();
+  // });
 
   eleventyConfig.addPassthroughCopy('public');
 

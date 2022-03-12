@@ -181,7 +181,7 @@ const colors = [
 
 watch(currentColor, (val) => {
   addProperties(val);
-  triggerContrast(els);
+  triggerContrast(window.els);
   saveStateLocally();
 });
 

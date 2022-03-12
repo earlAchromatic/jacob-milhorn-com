@@ -526,6 +526,10 @@ pre {
   max-width: var(--measure);
 }
 
+pre code * {
+  color: white;
+}
+
 .center {
   display: -webkit-box;
   display: -ms-flexbox;

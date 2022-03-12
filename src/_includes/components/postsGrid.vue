@@ -2,24 +2,24 @@
   <div class="blog">
     <h2>Blog</h2>
     <gridFilter :tags="tags" @tags-filter="filterByTag" />
-
     <div
-      class="grid"
+      class="grid holo"
       v-show="
-        !dynamicPostlist.every((post) =>
-          post.tags.some((tag) => tag.include === false)
+        dynamicPostlist.some((post) =>
+          post.tags.some((tag) => tag.include === true)
         )
       "
     >
       <template v-for="(post, j) in dynamicPostlist">
         <Transition>
           <div
+            class="HC"
             :style="{
               background: `linear-gradient(135deg, var(--color-${
                 colorNum - j
               }), var(--color-${colorNum - j - 2} ))`,
             }"
-            v-if="!post.tags.some((tags) => tags.include !== true)"
+            v-if="post.tags.some((tags) => tags.include === true)"
           >
             <h1>{{ post.title }}</h1>
 
@@ -35,7 +35,7 @@
     <img
       v-show="
         dynamicPostlist.every((post) =>
-          post.tags.some((tag) => tag.include === false)
+          post.tags.every((tag) => tag.include === false)
         )
       "
       src="/images/404.svg"
@@ -105,7 +105,7 @@ export default {};
   min-height: 100vh
   display: flex
   flex-direction: column
-
+  margin-bottom: 2rem
   img
     max-width: 15rem
     margin: 0 auto
@@ -114,8 +114,9 @@ export default {};
 .grid
   display: grid
   grid-gap: 1rem
-
   transition: all 1s ease
+  padding: 2rem
+
   &>*
     box-shadow: var(--box-shadow-lifted)
     padding: 1rem

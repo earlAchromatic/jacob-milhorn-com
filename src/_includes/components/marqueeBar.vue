@@ -20,7 +20,6 @@ const show = ref(false);
 
 const showit = () => {
   show.value = !show.value;
-  console.log('showing');
 };
 
 const onAfterEnter = (env) => {

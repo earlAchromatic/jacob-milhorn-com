@@ -37,7 +37,7 @@ includedTags.value = props.tags
   .filter((tag) => tag != 'posts')
   .filter(unique)
   .map((tag) => ({
-    include: true,
+    include: false,
     name: tag,
     count: countTags(tag),
   }));

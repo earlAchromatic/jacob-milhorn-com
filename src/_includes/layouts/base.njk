@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class='HC'>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -39,7 +39,7 @@
       }
     </style>
 </head>
-<body dsd-pending>
+<body dsd-pending class="HC">
 
 {% component 'components/header.vue'%}
 {% component 'components/marqueeBar.vue', hydrate='eager'%}
@@ -59,6 +59,12 @@
     } 
     document.body.removeAttribute('dsd-pending');
 
+
+//uncomment to turn high contrast on. Right now, its not working.
+{# window.addEventListener("DOMContentLoaded", () => {
+  window.els = document.querySelectorAll(".HC"); // get all HC elements (high contrasts)
+  
+}) #}
 </script>
 </body>
 </html>
