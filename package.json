@@ -12,6 +12,9 @@
     "@11ty/eleventy": "^1.0.0",
     "@11ty/eleventy-plugin-syntaxhighlight": "^4.0.0",
     "@slinkity/renderer-vue": "^0.1.6",
+    "@tryghost/content-api": "^1.6.3",
+    "dotenv": "^16.0.0",
+    "jsdom": "^19.0.0",
     "sass": "^1.49.8",
     "slinkity": "^0.6.1",
     "vue": "^3.2.31"
@@ -19,6 +22,8 @@
   "dependencies": {
     "@vueuse/core": "^7.6.2",
     "@vueuse/sound": "^1.1.7",
+    "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
     "vite": "^2.8.6"
   }
 }

@@ -1,7 +1,16 @@
 function getBackgroundRGB(elArr) {
   return Array.from(elArr).map((e) => {
+    handleGradient(e);
     return colorValues(getComputedStyle(e).backgroundColor);
   });
+}
+
+function handleGradient(el) {
+  let bg = getComputedStyle(el).background;
+  if (bg.includes('linear-gradient')) {
+    console.log(el.background);
+  }
+  console.log(bg);
 }
 
 //courtesy of https://stackoverflow.com/questions/34980574/how-to-extract-color-values-from-rgb-string-in-javascript/34980846
@@ -74,4 +83,3 @@ function updateContrastEls(els) {
 export default function triggerContrast(els) {
   setTimeout(() => updateContrastEls(els), 200);
 }
-

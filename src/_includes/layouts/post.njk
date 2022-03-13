@@ -13,10 +13,10 @@ layout: layouts/base.njk
 {% set postDat %}
 [
 {% for post in collections.posts %}
-{"title": "{{post.data.title}}", 
+{"title": "{{post.title}}", 
   "url": "{{post.url}}", 
-  "excerpt": "{{post.data.excerpt}}", 
-  "tags":[ {% for tag in post.data.tags %}
+  "excerpt": "{{post.excerpt | safe}}", 
+  "tags":[ {% for tag in post.tags %}
     "{{tag}}" 
     {% if not loop.last %},{% endif %}
   {% endfor %}]}
@@ -32,3 +32,4 @@ layout: layouts/base.njk
 {% component 'components/postsGrid.vue', posts=postDat, hydrate="lazy" %}
 
 <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.27.0/prism.min.js" integrity="sha512-/Swpp6aCQ0smuZ+zpklJqMClcUlvxhpLf9aAcM7JjJrj2waCU4dikm3biOtMVAflOOeniW9qzaNXNrbOAOWFCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

@@ -1,0 +1,11 @@
+---
+layout: layouts/post.njk
+pagination:
+  data: collections.posts
+  size: 1
+  alias: post
+permalink: "{{post.url}}"
+---
+
+
+{{post.html   | safe}}
