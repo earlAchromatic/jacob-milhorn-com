@@ -3,7 +3,7 @@
     <h2>Blog</h2>
     <gridFilter :tags="tags" @tags-filter="filterByTag" />
     <div
-      class="grid holo"
+      class="grid"
       v-show="
         dynamicPostlist.some((post) =>
           post.tags.some((tag) => tag.include === true)
@@ -16,15 +16,19 @@
             class="HC"
             :style="{
               background: `linear-gradient(135deg, var(--color-${
-                colorNum - j
-              }), var(--color-${colorNum - j - 2} ))`,
+                colorNum - j >= 0 ? colorNum - j : colorNum
+              }), var(--color-${
+                colorNum - j >= 2 ? colorNum - j - 2 : colorNum - 2
+              } ))`,
             }"
             v-if="post.tags.some((tags) => tags.include === true)"
           >
             <h1>{{ post.title }}</h1>
-
             <tag-render :tags="post.tags"></tag-render>
-            <hr />
+            <div v-if="post.feature_image" class="holo-overlay">
+              <img :src="post.feature_image" alt="" />
+            </div>
+
             <p>{{ post.excerpt }}</p>
             <a class="button" :href="post.url">Read</a>
           </div>
@@ -33,13 +37,13 @@
     </div>
 
     <img
+      src="/images/404.svg"
+      alt=""
       v-show="
         dynamicPostlist.every((post) =>
           post.tags.every((tag) => tag.include === false)
         )
       "
-      src="/images/404.svg"
-      alt=""
     />
   </div>
 </template>
@@ -48,8 +52,18 @@
 import Section from './section.vue';
 import TagRender from './TagRender.vue';
 import gridFilter from './gridFilter.vue';
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 const colorNum = ref(9);
+
+onMounted(() => {
+  turnOnHolo();
+});
+
+const turnOnHolo = () => {
+  setTimeout(() => {
+    document.querySelector('.grid').classList.add('holo');
+  }, 1200);
+};
 
 const props = defineProps(['posts']);
 
@@ -106,6 +120,8 @@ export default {};
   display: flex
   flex-direction: column
   margin-bottom: 2rem
+  & *
+    color: var(--font-color)
   img
     max-width: 15rem
     margin: 0 auto
@@ -116,17 +132,34 @@ export default {};
   grid-gap: 1rem
   transition: all 1s ease
   padding: 2rem
+  img
+    object-fit: cover
+    margin: 0
+    max-height: 10rem
+    width: 100%
+    max-width: none
+
+  p
+    background: rgba(255,255,255,0.75)
+    padding: 0.5rem
+    margin: 0
+    color: rgb(1,1 ,1,0.95 )
 
   &>*
     box-shadow: var(--box-shadow-lifted)
-    padding: 1rem
+    //padding: 1rem
     display: flex
     flex-direction: column
-    justify-content: space-evenly
+    justify-content: space-between
     transition: all 1s
     h1
       font-size: var(--s0)
       line-height: var(--s0)
+      margin: 1rem
+      margin-bottom: 0
+
+    hr
+      width: 90%
 
 @supports (width: min(250px, 100%))
   .grid

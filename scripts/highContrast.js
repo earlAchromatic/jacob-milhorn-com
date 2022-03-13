@@ -8,7 +8,7 @@ function getBackgroundRGB(elArr) {
 function handleGradient(el) {
   let bg = getComputedStyle(el).background;
   if (bg.includes('linear-gradient')) {
-    console.log(el.background);
+    let rgb = bg.match(/rgb[a]/);
   }
   console.log(bg);
 }

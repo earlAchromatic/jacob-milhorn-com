@@ -69,5 +69,5 @@ includedTags.value = props.tags
         padding: .5rem
     .notIncluded
         filter: saturate(25%) brightness(0.5)
-        color: var(--color-4)
+        color: var(--font-color)
 </style>

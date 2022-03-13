@@ -54,17 +54,17 @@
     let myStorage = window.localStorage;
     let colors = JSON.parse(myStorage.getItem('color'));
     if (colors) {
-      console.log(colors)
+      
      addProperties(colors); 
     } 
     document.body.removeAttribute('dsd-pending');
 
 
 //uncomment to turn high contrast on. Right now, its not working.
-{# window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", () => {
   window.els = document.querySelectorAll(".HC"); // get all HC elements (high contrasts)
-  
-}) #}
+  console.log(window.els)
+})
 </script>
 </body>
 </html>

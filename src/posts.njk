@@ -6,6 +6,16 @@ pagination:
   alias: post
 permalink: "{{post.url}}"
 ---
+<h1>{{post.title}}
 
 
+</h1>
+{{post.published_at}}
+<hr>
+{% if post.feature_image %}
+<div class='holo-overlay post'>
+  <img src="{{post.feature_image}}"/>
+</div>
+  
+{% endif %}
 {{post.html   | safe}}

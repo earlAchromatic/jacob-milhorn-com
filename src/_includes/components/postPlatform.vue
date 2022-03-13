@@ -52,7 +52,7 @@ const props = defineProps(['postUrl']);
 #cusdis_thread
   bottom: 0
   position: relative
-  clip-path: inset(0 0 3% 0)
+  //clip-path: inset(0 0 3% 0)
   max-width: var(--measure)
   iframe
     box-shadow: none

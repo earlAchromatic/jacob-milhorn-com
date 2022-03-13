@@ -57,7 +57,15 @@ onMounted(() => {
   } else {
     tempUsername.value = 'Fellow Human';
   }
+
+  setTimeout(() => {
+    if (!document.cookie.includes('popped')) {
+      document.cookie = 'popped=true; path=/';
+      show.value = !show.value;
+    }
+  }, 1500);
 });
+
 const accessible = ref(false);
 const show = ref(false);
 const userName = ref('');
@@ -116,12 +124,9 @@ const debouncedReplace = debounce(() => {
     userName.value != '' &&
     !regex.test(userName.value)
   ) {
-    console.log(tempUsername.value);
     replaceFellowHuman(tempUsername.value);
     tempUsername.value = userName.value;
   }
-  console.log(tempUsername.value);
-  console.log(userName.value);
 }, 500);
 
 const replaceFellowHuman = (from) => {
@@ -165,7 +170,8 @@ const toggleAccessibility = () => {
     height: 3rem
     background-color: rgba(123, 208,246 , 0.5)
     background: url('/@root/public/images/signal.svg')
-    animation: var(--animation) 1s infinite forwards
+    background-size: 0.5rem
+    animation: var(--animation) 0.5s infinite forwards linear
     box-shadow: inset 1px 1px 25px rgba(123, 208,246  )
     display: flex
     justify-content: center
@@ -176,6 +182,8 @@ const toggleAccessibility = () => {
     clip-path: polygon(25px 0%, 100% 0%, 100% 100%, 25px 100%, 0 50%)
     button
           font-size: 0.8rem
+    .invert
+      color: var(--font-color)
     .accessibility
       height: 70%
       background: var(--color-4)
@@ -183,9 +191,11 @@ const toggleAccessibility = () => {
       border: none
       display: flex
       flex-direction: column
+      color: var(--font-color)
       span
         font-size: 0.6rem
         margin: 0
+        color: inherit
 
       &:hover
         background: var(--primary)

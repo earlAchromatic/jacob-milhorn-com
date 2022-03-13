@@ -1,29 +1,17 @@
 <template>
   <div>
     <div class="button-cluster">
-      <button @click="setColorArray(colors[0].ghost, colorString)">
-        Monochrome
-      </button>
-      <button @click="setColorArray(colors[1].white, colorString)">
-        Baseline
-      </button>
-      <button @click="setColorArray(colors[2].choice, colorString)">
+      <button @click="setColorArray(colors[0], colorString)">Monochrome</button>
+      <button @click="setColorArray(colors[1], colorString)">Baseline</button>
+      <button @click="setColorArray(colors[2], colorString)">
         Jacob's Choice
       </button>
-      <button @click="setColorArray(colors[3].greens, colorString)">
-        Tractor
-      </button>
-      <button @click="setColorArray(colors[4].yellows, colorString)">
-        Gas Giant
-      </button>
-      <button @click="setColorArray(colors[5].darks, colorString)">Deep</button>
-      <button @click="setColorArray(colors[6].purples, colorString)">
-        Tonic
-      </button>
-      <button @click="setColorArray(colors[7].blue, colorString)">
-        Iceberg
-      </button>
-      <button @click="setColorArray(colors[8].sand, colorString)">Sand</button>
+      <button @click="setColorArray(colors[3], colorString)">Tractor</button>
+      <button @click="setColorArray(colors[4], colorString)">Gas Giant</button>
+      <button @click="setColorArray(colors[5], colorString)">Deep</button>
+      <button @click="setColorArray(colors[6], colorString)">Tonic</button>
+      <button @click="setColorArray(colors[7], colorString)">Iceberg</button>
+      <button @click="setColorArray(colors[8], colorString)">Sand</button>
     </div>
 
     <button
@@ -32,6 +20,7 @@
     >
       Invert
     </button>
+    <!-- <button @click="invertFontColor">Invert Text Color</button> -->
     <!-- <button @click="resetSVG('#FF0000')">bg</button> -->
   </div>
 </template>
@@ -39,8 +28,7 @@
 <script setup>
 import { onMounted, ref, watch } from 'vue';
 
-import triggerContrast from '/@root/scripts/highContrast.js';
-import { addProperties } from '/@root/scripts/color.js';
+import { addProperties, colors } from '/@root/scripts/color.js';
 
 onMounted(() => {
   // els = [...document.querySelectorAll('.HC')]; // get all HC elements (high contrasts)
@@ -48,159 +36,90 @@ onMounted(() => {
   myStorage = window.localStorage;
   currentColor.value = JSON.parse(myStorage.getItem('color'));
   currentColor.value = currentColor.value ?? colors[1].white;
+  currentColorName.value = myStorage.getItem('colorName');
+  currentColorIndex.value = getCurrentColorIndex(currentColorName.value);
+  console.log(currentColorIndex.value);
+  setTextColors(colors[currentColorIndex.value]);
+  setFontColor(colors[currentColorIndex.value]);
 });
 
-let els = [];
 const currentColor = ref([]);
+const textColors = ref({});
+const currentColorName = ref('');
+const currentColorIndex = ref(0);
+
+const invert = ref(false);
 
 let myStorage;
 
 const colorString = '--color-';
 
-const colors = [
-  {
-    ghost: [
-      '#000000ff',
-      '#00000000',
-      '#00000000',
-      '#00000000',
-      '#00000000',
-      '#00000000',
-      '#ffffffff',
-      '#00000000',
-      '#00000000',
-      '#a4a4a4e0',
-    ],
-  },
-  {
-    white: [
-      '#ffffffff',
-      '#ffffffff',
-      '#ffffffff',
-      '#ffffffff',
-      '#ffffffff',
-      '#ffffffff',
-      '#c9c9c9',
-      '#ffffffff',
-      '#ffffffff',
-      '#ffffffff',
-    ],
-  },
-  {
-    choice: [
-      '#54478cff',
-      '#2c699aff',
-      '#048ba8ff',
-      '#0db39eff',
-      '#16db93ff',
-      '#83e377ff',
-      '#b9e769ff',
-      '#efea5aff',
-      '#f1c453ff',
-      '#f29e4cff',
-    ],
-  },
-
-  {
-    greens: [
-      '#007f5fff',
-      '#2b9348ff',
-      '#55a630ff',
-      '#80b918ff',
-      '#aacc00ff',
-      '#bfd200ff',
-      '#d4d700ff',
-      '#dddf00ff',
-      '#eeef20ff',
-      '#ffff3fff',
-    ],
-  },
-  {
-    yellows: [
-      '#ff7b00ff',
-      '#ff8800ff',
-      '#ff9500ff',
-      '#ffa200ff',
-      '#ffaa00ff',
-      '#ffb700ff',
-      '#ffc300ff',
-      '#ffd000ff',
-      '#ffdd00ff',
-      '#ffea00ff',
-    ],
-  },
-  {
-    darks: [
-      '#006466ff',
-      '#065a60ff',
-      '#0b525bff',
-      '#144552ff',
-      '#1b3a4bff',
-      '#212f45ff',
-      '#272640ff',
-      '#312244ff',
-      '#3e1f47ff',
-      '#4d194dff',
-    ],
-  },
-  {
-    purples: [
-      '#7400b8ff',
-      '#6930c3ff',
-      '#5e60ceff',
-      '#5390d9ff',
-      '#4ea8deff',
-      '#48bfe3ff',
-      '#56cfe1ff',
-      '#64dfdfff',
-      '#72efddff',
-      '#80ffdbff',
-    ],
-  },
-  {
-    blue: [
-      '#E3F2FD',
-      '#BBDEFB',
-      '#90CAF9',
-      '#64B5F6',
-      '#42A5F5',
-      '#2196F3',
-      '#1E88E5',
-      '#1976D2',
-      '#1565C0',
-      '#0D47A1',
-    ],
-  },
-  {
-    sand: [
-      '#CCD5AE',
-      '#DBE1BC',
-      '#E9EDC9',
-      '#F4F4D5',
-      '#FEFAE0',
-      '#FCF4D7',
-      '#FAEDCD',
-      '#E7C8A0',
-      '#DEB68A',
-      '#D4A373',
-    ],
-  },
-];
-
 watch(currentColor, (val) => {
   addProperties(val);
-  triggerContrast(window.els);
   saveStateLocally();
 });
 
 const saveStateLocally = () => {
   if (myStorage) {
     myStorage.setItem('color', JSON.stringify(currentColor.value));
+    myStorage.setItem('colorName', currentColorName.value);
+  }
+};
+
+const getCurrentColorIndex = (getColor) => {
+  let index;
+  colors.forEach((color, i) => {
+    if (Object.keys(color)[0] === getColor) {
+      index = i;
+    }
+  });
+  return index;
+};
+
+const setFontColor = (colors) => {
+  document.documentElement.style.setProperty('--font-color', colors.textColor);
+};
+
+const setTextColors = (colors) => {
+  textColors.value = {
+    textColor: colors.textColor,
+    invertColor: colors.invertColor,
+  };
+};
+
+const newInvertColors = () => {
+  if (invert.value) {
+    document.documentElement.style.setProperty(
+      '--font-color',
+      textColors.value.invertColor
+    );
+  } else {
+    document.documentElement.style.setProperty(
+      '--font-color',
+      textColors.value.textColor
+    );
+  }
+
+  invert.value = !invert.value;
+};
+
+const invertFontColor = () => {
+  let root = getComputedStyle(document.documentElement);
+
+  if (root.getPropertyValue('--font-color') === 'black') {
+    document.documentElement.style.setProperty('--font-color', 'white');
+  } else {
+    document.documentElement.style.setProperty('--font-color', 'black');
   }
 };
 
 const setColorArray = (colors, code) => {
-  currentColor.value = makeStyleArray(colors, code);
+  let colorArr = Object.values(colors)[0];
+  currentColor.value = makeStyleArray(colorArr, code);
+  setFontColor(colors);
+  setTextColors(colors);
+  currentColorName.value = Object.keys(colors)[0];
+  console.log(currentColorName.value);
 };
 
 const makeStyleArray = (colorArray, code) => {
@@ -211,6 +130,7 @@ const makeStyleArray = (colorArray, code) => {
 
 const invertStyleArray = (colorArray, code) => {
   let tmp = [...colorArray].reverse();
+  newInvertColors();
   return colorArray.map((e, i) => {
     return code + i + ': ' + tmp[i].split(':')[1];
   });

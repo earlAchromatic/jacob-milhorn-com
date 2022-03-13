@@ -17,10 +17,12 @@ const props = defineProps(['tags']);
     gap: 1rem
     justify-content: flex-start
     align-items: center
-
+    margin-left: 0.25rem
+    margin-right: 0.25rem
     span
         background: var(--color-9)
         border: 1px solid var(--color-6)
         border-radius: 1.5rem
         padding: .5rem
+        color: inherit
 </style>
