@@ -22,6 +22,8 @@
   "dependencies": {
     "@vueuse/core": "^7.6.2",
     "@vueuse/sound": "^1.1.7",
+    "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
     "vite": "^2.8.6"
   }
 }

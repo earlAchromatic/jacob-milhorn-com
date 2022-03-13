@@ -39,6 +39,7 @@
     //feature sizes
     --blur: 1rem
     --border-rad: 0.5rem
+    --animation: slider
     --box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5)
     --box-shadow-lifted: 1px 2px 6px rgba(0, 0, 0, 0.5)
     --pad: 1rem
@@ -223,6 +224,7 @@ nav
     nav
         .groovy
             font-size: 3rem
+    
     .center
         .wrap
             width: 100vw
@@ -275,6 +277,12 @@ pre
     code *
         color: white
 
+code 
+    background: var(--color-4)
+    color: black
+    padding-left: 0.25rem
+    padding-right: 0.25rem
+    border: 1px solid white
 
 
 .center
@@ -294,10 +302,17 @@ pre
 
 .holo
     background: aqua
-    background-color: rgba(123, 208,246 , 0.5)
+    background-color: rgba(123, 208,246 , 1)
     background: url('/@root/public/images/signal.svg')
-    animation: slider 1s infinite forwards
+    animation: var(--animation) 1s infinite forwards
     transform: scale3d(0)
-    box-shadow: inset 1px 1px 25px rgba(123, 208,246  )
+    box-shadow: inset 1px 1px 25px rgba(123, 208,246,0.5 )
     
     backdrop-filter: blur(10px) hue-rotate(45deg)
+
+
+@keyframes slider
+    0%
+        background-position-x: 0
+    100%
+        background-position-x: 100%

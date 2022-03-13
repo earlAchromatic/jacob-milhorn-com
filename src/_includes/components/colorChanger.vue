@@ -1,27 +1,35 @@
 <template>
   <div>
-    <button @click="setColorArray(colors[0].ghost, colorString)">
-      Monochrome
-    </button>
-    <button @click="setColorArray(colors[1].white, colorString)">
-      Baseline
-    </button>
-    <button @click="setColorArray(colors[2].multiorange, colorString)">
-      Jacob's Choice
-    </button>
-    <button @click="setColorArray(colors[3].greens, colorString)">
-      Tractor
-    </button>
-    <button @click="setColorArray(colors[4].yellows, colorString)">
-      Gas Giant
-    </button>
-    <button @click="setColorArray(colors[5].darks, colorString)">Deep</button>
-    <button @click="setColorArray(colors[6].purples, colorString)">
-      Tonic
-    </button>
-    <button @click="setColorArray(colors[7].blue, colorString)">Iceberg</button>
-    <button @click="setColorArray(colors[8].sand, colorString)">Sand</button>
-    <button @click="currentColor = invertStyleArray(currentColor, colorString)">
+    <div class="button-cluster">
+      <button @click="setColorArray(colors[0].ghost, colorString)">
+        Monochrome
+      </button>
+      <button @click="setColorArray(colors[1].white, colorString)">
+        Baseline
+      </button>
+      <button @click="setColorArray(colors[2].choice, colorString)">
+        Jacob's Choice
+      </button>
+      <button @click="setColorArray(colors[3].greens, colorString)">
+        Tractor
+      </button>
+      <button @click="setColorArray(colors[4].yellows, colorString)">
+        Gas Giant
+      </button>
+      <button @click="setColorArray(colors[5].darks, colorString)">Deep</button>
+      <button @click="setColorArray(colors[6].purples, colorString)">
+        Tonic
+      </button>
+      <button @click="setColorArray(colors[7].blue, colorString)">
+        Iceberg
+      </button>
+      <button @click="setColorArray(colors[8].sand, colorString)">Sand</button>
+    </div>
+
+    <button
+      class="invert"
+      @click="currentColor = invertStyleArray(currentColor, colorString)"
+    >
       Invert
     </button>
     <!-- <button @click="resetSVG('#FF0000')">bg</button> -->
@@ -69,30 +77,30 @@ const colors = [
       '#ffffffff',
       '#ffffffff',
       '#ffffffff',
-      '#FF0000ff',
-      '#ffffffff',
-      '#ffffffff',
-      '#353535e8',
       '#ffffffff',
       '#ffffffff',
       '#ffffffff',
+      '#c9c9c9',
+      '#ffffffff',
+      '#ffffffff',
+      '#ffffffff',
+    ],
+  },
+  {
+    choice: [
+      '#54478cff',
+      '#2c699aff',
+      '#048ba8ff',
+      '#0db39eff',
+      '#16db93ff',
+      '#83e377ff',
+      '#b9e769ff',
+      '#efea5aff',
+      '#f1c453ff',
+      '#f29e4cff',
     ],
   },
 
-  {
-    multiorange: [
-      '#f29e4cff',
-      '#f1c453ff',
-      '#efea5aff',
-      '#b9e769ff',
-      '#83e377ff',
-      '#16db93ff',
-      '#0db39eff',
-      '#048ba8ff',
-      '#2c699aff',
-      '#54478cff',
-    ],
-  },
   {
     greens: [
       '#007f5fff',
@@ -232,6 +240,16 @@ const resetSVG = (hexColor) => {
 </script>
 
 <style lang="sass" scoped>
+
+.button-cluster
+  display: flex
+  flex-wrap: wrap
+  align-content: space-around
+  justify-content: left
+  width: 50%
+hr
+  width: 1px
+  margin-right: 1rem
 button
     background: transparent
     border: none
@@ -239,4 +257,8 @@ button
     &:hover
       background: var(--primary)
       color: #cbcbcb
+.invert
+  height: 70%
+  background: var(--color-4)
+  box-shadow: var(--box-shadow)
 </style>

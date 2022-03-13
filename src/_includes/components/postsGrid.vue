@@ -140,4 +140,8 @@ export default {};
 .v-enter-from,
 .v-leave-to
   opacity: 0
+
+@media screen and ( max-width: 800px )
+  .blog
+    width: 90vw
 </style>

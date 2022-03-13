@@ -241,6 +241,7 @@ ul {
   --secondary-font: monospace;
   --blur: 1rem;
   --border-rad: 0.5rem;
+  --animation: slider;
   --box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
   --box-shadow-lifted: 1px 2px 6px rgba(0, 0, 0, 0.5);
   --pad: 1rem;
@@ -530,6 +531,14 @@ pre code * {
   color: white;
 }
 
+code {
+  background: var(--color-4);
+  color: black;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  border: 1px solid white;
+}
+
 .center {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -552,5 +561,37 @@ pre code * {
   line-height: var(--s-1);
   position: relative;
   margin-bottom: 0.5rem;
+}
+
+.holo {
+  background: aqua;
+  background-color: #7bd0f6;
+  background: url("/@root/public/images/signal.svg");
+  -webkit-animation: var(--animation) 1s infinite forwards;
+          animation: var(--animation) 1s infinite forwards;
+  -webkit-transform: scale3d(0);
+          transform: scale3d(0);
+  -webkit-box-shadow: inset 1px 1px 25px rgba(123, 208, 246, 0.5);
+          box-shadow: inset 1px 1px 25px rgba(123, 208, 246, 0.5);
+  -webkit-backdrop-filter: blur(10px) hue-rotate(45deg);
+          backdrop-filter: blur(10px) hue-rotate(45deg);
+}
+
+@-webkit-keyframes slider {
+  0% {
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: 100%;
+  }
+}
+
+@keyframes slider {
+  0% {
+    background-position-x: 0;
+  }
+  100% {
+    background-position-x: 100%;
+  }
 }
 /*# sourceMappingURL=style.css.map */
