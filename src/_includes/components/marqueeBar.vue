@@ -19,6 +19,7 @@
           v-show="!accessible"
         >
           Holographic Animation Off
+          <span>(recommended for mobile)</span>
         </button>
         <button
           class="accessibility"
@@ -180,6 +181,12 @@ const toggleAccessibility = () => {
       background: var(--color-4)
       box-shadow: var(--box-shadow)
       border: none
+      display: flex
+      flex-direction: column
+      span
+        font-size: 0.6rem
+        margin: 0
+
       &:hover
         background: var(--primary)
         color: #cbcbcb
@@ -194,10 +201,6 @@ const toggleAccessibility = () => {
       background: none
       border: none
       text-decoration: none
-
-    .namer
-
-
 
 /* we will explain what these classes do next! */
 .slide-enter-active,
