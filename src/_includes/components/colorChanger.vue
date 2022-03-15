@@ -1,139 +1,59 @@
 <template>
   <div>
     <div class="button-cluster">
-      <button @click="setColorArray(colors[0], colorString)">Monochrome</button>
-      <button @click="setColorArray(colors[1], colorString)">Baseline</button>
-      <button @click="setColorArray(colors[2], colorString)">
-        Jacob's Choice
-      </button>
-      <button @click="setColorArray(colors[3], colorString)">Tractor</button>
-      <button @click="setColorArray(colors[4], colorString)">Gas Giant</button>
-      <button @click="setColorArray(colors[5], colorString)">Deep</button>
-      <button @click="setColorArray(colors[6], colorString)">Tonic</button>
-      <button @click="setColorArray(colors[7], colorString)">Iceberg</button>
-      <button @click="setColorArray(colors[8], colorString)">Sand</button>
+      <button @click="currentColor = colors[0]">Monochrome</button>
+      <button @click="currentColor = colors[1]">Baseline</button>
+      <button @click="currentColor = colors[2]">Jacob's Choice</button>
+      <button @click="currentColor = colors[3]">Tractor</button>
+      <button @click="currentColor = colors[4]">Gas Giant</button>
+      <button @click="currentColor = colors[5]">Deep</button>
+      <button @click="currentColor = colors[6]">Tonic</button>
+      <button @click="currentColor = colors[7]">Iceberg</button>
+      <button @click="currentColor = colors[8]">Sand</button>
     </div>
 
-    <button
-      class="invert"
-      @click="currentColor = invertStyleArray(currentColor, colorString)"
-    >
+    <button class="invert" @click="invert = !invert" :disabled="invertDisabled">
       Invert
     </button>
-    <!-- <button @click="invertFontColor">Invert Text Color</button> -->
-    <!-- <button @click="resetSVG('#FF0000')">bg</button> -->
   </div>
 </template>
 
 <script setup>
 import { onMounted, ref, watch } from 'vue';
 
-import { addProperties, colors } from '/@root/scripts/color.js';
+import { addProperties, colors, setFontColor } from '/@root/scripts/color.js';
 
 onMounted(() => {
-  // els = [...document.querySelectorAll('.HC')]; // get all HC elements (high contrasts)
-  // console.log(els);
   myStorage = window.localStorage;
   currentColor.value = JSON.parse(myStorage.getItem('color'));
-  currentColor.value = currentColor.value ?? colors[1].white;
-  currentColorName.value = myStorage.getItem('colorName');
-  currentColorIndex.value = getCurrentColorIndex(currentColorName.value);
-  console.log(currentColorIndex.value);
-  setTextColors(colors[currentColorIndex.value]);
-  setFontColor(colors[currentColorIndex.value]);
+  currentColor.value = currentColor.value ?? colors[1];
+  invert.value = currentColor.value.inverted;
+  invertDisabled.value = currentColor.value.disableInvert;
 });
 
-const currentColor = ref([]);
-const textColors = ref({});
-const currentColorName = ref('');
-const currentColorIndex = ref(0);
-
-const invert = ref(false);
+const currentColor = ref({});
+const invertDisabled = ref();
+const invert = ref();
 
 let myStorage;
 
-const colorString = '--color-';
-
 watch(currentColor, (val) => {
-  addProperties(val);
+  addProperties(val, currentColor.value.inverted);
+  invert.value = currentColor.value.inverted;
+  invertDisabled.value = currentColor.value.disableInvert;
+  saveStateLocally();
+});
+
+watch(invert, (val) => {
+  addProperties(currentColor.value, val);
+  currentColor.value.inverted = val;
   saveStateLocally();
 });
 
 const saveStateLocally = () => {
   if (myStorage) {
     myStorage.setItem('color', JSON.stringify(currentColor.value));
-    myStorage.setItem('colorName', currentColorName.value);
   }
-};
-
-const getCurrentColorIndex = (getColor) => {
-  let index;
-  colors.forEach((color, i) => {
-    if (Object.keys(color)[0] === getColor) {
-      index = i;
-    }
-  });
-  return index;
-};
-
-const setFontColor = (colors) => {
-  document.documentElement.style.setProperty('--font-color', colors.textColor);
-};
-
-const setTextColors = (colors) => {
-  textColors.value = {
-    textColor: colors.textColor,
-    invertColor: colors.invertColor,
-  };
-};
-
-const newInvertColors = () => {
-  if (invert.value) {
-    document.documentElement.style.setProperty(
-      '--font-color',
-      textColors.value.invertColor
-    );
-  } else {
-    document.documentElement.style.setProperty(
-      '--font-color',
-      textColors.value.textColor
-    );
-  }
-
-  invert.value = !invert.value;
-};
-
-const invertFontColor = () => {
-  let root = getComputedStyle(document.documentElement);
-
-  if (root.getPropertyValue('--font-color') === 'black') {
-    document.documentElement.style.setProperty('--font-color', 'white');
-  } else {
-    document.documentElement.style.setProperty('--font-color', 'black');
-  }
-};
-
-const setColorArray = (colors, code) => {
-  let colorArr = Object.values(colors)[0];
-  currentColor.value = makeStyleArray(colorArr, code);
-  setFontColor(colors);
-  setTextColors(colors);
-  currentColorName.value = Object.keys(colors)[0];
-  console.log(currentColorName.value);
-};
-
-const makeStyleArray = (colorArray, code) => {
-  return colorArray.map((e, i) => {
-    return code + i + ': ' + e;
-  });
-};
-
-const invertStyleArray = (colorArray, code) => {
-  let tmp = [...colorArray].reverse();
-  newInvertColors();
-  return colorArray.map((e, i) => {
-    return code + i + ': ' + tmp[i].split(':')[1];
-  });
 };
 
 const resetSVG = (hexColor) => {
@@ -177,6 +97,11 @@ button
     &:hover
       background: var(--primary)
       color: #cbcbcb
+    &[disabled]
+      filter: saturate(0.2)
+      &:hover
+        background: none
+        cursor: not-allowed
 .invert
   height: 70%
   background: var(--color-4)

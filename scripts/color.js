@@ -1,13 +1,45 @@
-export function addProperties(styleArray) {
+const COLOR_STRING = '--color-';
+
+export function addProperties(colors, invert) {
   let root = document.documentElement;
-  styleArray.forEach((e) => {
+  let colorArray = [];
+  if (!invert) {
+    colorArray = makeStyleArray(colors.scheme);
+  } else {
+    colorArray = makeStyleArray([...colors.scheme].reverse());
+  }
+  colorArray.forEach((e) => {
     root.style.setProperty(e.split(':')[0], e.split(':')[1]);
   });
+  setFontColors(invert, colors);
 }
 
+export const makeStyleArray = (colorArray) => {
+  return colorArray.map((e, i) => {
+    return COLOR_STRING + i + ': ' + e;
+  });
+};
+
+export const setFontColor = (colors) => {
+  document.documentElement.style.setProperty('--font-color', colors.textColor);
+};
+
+export const setFontColors = (bool, color) => {
+  if (bool) {
+    document.documentElement.style.setProperty(
+      '--font-color',
+      color.invertColor
+    );
+  } else {
+    document.documentElement.style.setProperty('--font-color', color.textColor);
+  }
+};
 export const colors = [
   {
-    ghost: [
+    name: 'ghost',
+    inverted: false,
+    disableInvert: true,
+    scheme: [
       '#000000ff',
       '#00000000',
       '#00000000',
@@ -15,15 +47,18 @@ export const colors = [
       '#00000000',
       '#00000000',
       '#ffffffff',
-      '#00000000',
+      '#e4e4e4b3',
       '#00000000',
       '#a4a4a4e0',
     ],
     textColor: 'black',
-    invertColor: 'white',
+    invertColor: '#6d6d6d',
   },
   {
-    white: [
+    name: 'white',
+    inverted: false,
+    disableInvert: true,
+    scheme: [
       '#ffffffff',
       '#ffffffff',
       '#ffffffff',
@@ -39,7 +74,9 @@ export const colors = [
     invertColor: 'black',
   },
   {
-    choice: [
+    name: 'choice',
+    inverted: false,
+    scheme: [
       '#54478cff',
       '#2c699aff',
       '#048ba8ff',
@@ -56,7 +93,9 @@ export const colors = [
   },
 
   {
-    greens: [
+    name: 'greens',
+    inverted: false,
+    scheme: [
       '#007f5fff',
       '#2b9348ff',
       '#55a630ff',
@@ -69,10 +108,12 @@ export const colors = [
       '#ffff3fff',
     ],
     textColor: 'black',
-    invertColor: 'gray',
+    invertColor: 'black',
   },
   {
-    yellows: [
+    name: 'yellows',
+    inverted: false,
+    scheme: [
       '#ff7b00ff',
       '#ff8800ff',
       '#ff9500ff',
@@ -88,7 +129,9 @@ export const colors = [
     invertColor: 'black',
   },
   {
-    darks: [
+    name: 'darks',
+    inverted: false,
+    scheme: [
       '#006466ff',
       '#065a60ff',
       '#0b525bff',
@@ -104,7 +147,9 @@ export const colors = [
     invertColor: 'white',
   },
   {
-    purples: [
+    name: 'purples',
+    inverted: false,
+    scheme: [
       '#7400b8ff',
       '#6930c3ff',
       '#5e60ceff',
@@ -120,7 +165,9 @@ export const colors = [
     invertColor: 'white',
   },
   {
-    blue: [
+    name: 'blues',
+    inverted: false,
+    scheme: [
       '#E3F2FD',
       '#BBDEFB',
       '#90CAF9',
@@ -136,7 +183,9 @@ export const colors = [
     invertColor: 'black',
   },
   {
-    sand: [
+    name: 'sand',
+    inverted: false,
+    scheme: [
       '#CCD5AE',
       '#DBE1BC',
       '#E9EDC9',

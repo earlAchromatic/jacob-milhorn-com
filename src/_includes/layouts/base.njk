@@ -49,22 +49,17 @@
     
 <script type="module" src="/@root/scripts/highContrast.js"></script>
 <script type="module">
-  import {addProperties} from "/@root/scripts/color.js"
+  import {addProperties, colors, setFontColors} from "/@root/scripts/color.js"
   
     let myStorage = window.localStorage;
-    let colors = JSON.parse(myStorage.getItem('color'));
-    if (colors) {
-      
-     addProperties(colors); 
+    let color = JSON.parse(myStorage.getItem('color'));
+    if (color) {
+      addProperties(color, color.inverted); 
+      setFontColors(color.inverted, color);
     } 
     document.body.removeAttribute('dsd-pending');
 
 
-//uncomment to turn high contrast on. Right now, its not working.
-window.addEventListener("DOMContentLoaded", () => {
-  window.els = document.querySelectorAll(".HC"); // get all HC elements (high contrasts)
-  console.log(window.els)
-})
 </script>
 </body>
 </html>

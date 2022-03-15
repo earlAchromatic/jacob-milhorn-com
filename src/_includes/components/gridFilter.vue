@@ -63,11 +63,11 @@ includedTags.value = props.tags
         top: -.5rem
     span
         cursor: pointer
-        background: var(--color-9)
+        background: var(--color-8)
         border: 1px solid var(--color-6)
         border-radius: 1.5rem
         padding: .5rem
     .notIncluded
-        filter: saturate(25%) brightness(0.5)
+        filter: saturate(25%) brightness(0.85)
         color: var(--font-color)
 </style>

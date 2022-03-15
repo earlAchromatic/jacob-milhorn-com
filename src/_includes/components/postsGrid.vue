@@ -3,7 +3,7 @@
     <h2>Blog</h2>
     <gridFilter :tags="tags" @tags-filter="filterByTag" />
     <div
-      class="grid"
+      class="grid holo"
       v-show="
         dynamicPostlist.some((post) =>
           post.tags.some((tag) => tag.include === true)
@@ -11,7 +11,7 @@
       "
     >
       <template v-for="(post, j) in dynamicPostlist">
-        <Transition>
+        <Transition name="op">
           <div
             class="HC"
             :style="{
@@ -23,7 +23,7 @@
             }"
             v-if="post.tags.some((tags) => tags.include === true)"
           >
-            <h1>{{ post.title }}</h1>
+            <h3>{{ post.title }}</h3>
             <tag-render :tags="post.tags"></tag-render>
             <div v-if="post.feature_image" class="holo-overlay">
               <img :src="post.feature_image" alt="" />
@@ -54,16 +54,6 @@ import TagRender from './TagRender.vue';
 import gridFilter from './gridFilter.vue';
 import { ref, computed, onMounted } from 'vue';
 const colorNum = ref(9);
-
-onMounted(() => {
-  turnOnHolo();
-});
-
-const turnOnHolo = () => {
-  setTimeout(() => {
-    document.querySelector('.grid').classList.add('holo');
-  }, 1200);
-};
 
 const props = defineProps(['posts']);
 
@@ -152,11 +142,13 @@ export default {};
     flex-direction: column
     justify-content: space-between
     transition: all 1s
-    h1
+    h3
       font-size: var(--s0)
       line-height: var(--s0)
       margin: 1rem
       margin-bottom: 0
+      font-weight: 800
+      text-shadow: 0.5px 0.5px 1px var(--color-9)
 
     hr
       width: 90%
@@ -165,13 +157,13 @@ export default {};
   .grid
     grid-template-columns: repeat(auto-fill, minmax(min(250px, 50%), 1fr))
 
-.v-enter-active,
-.v-leave-active
+.op-enter-active,
+.op-leave-active
   transition: opacity 0.5s ease
 
 
-.v-enter-from,
-.v-leave-to
+.op-enter-from,
+.op-leave-to
   opacity: 0
 
 @media screen and ( max-width: 800px )
