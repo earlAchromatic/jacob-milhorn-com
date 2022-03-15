@@ -36,10 +36,11 @@
     --primary-trans: hsla(29, 100, 50, var(--trans-amount))
     --primary-font: 'Atkinson', sans-serif
     --secondary-font: monospace
+    --font-color: black
     //feature sizes
     --blur: 1rem
-    --border-rad: 0.5rem
-    --animation: slider
+    --border-rad: 0.25rem
+    --animation: none
     --box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5)
     --box-shadow-lifted: 1px 2px 6px rgba(0, 0, 0, 0.5)
     --pad: 1rem
@@ -279,10 +280,11 @@ pre
 
 :not(pre) > code 
     background: var(--color-4)
-    color: black
+    color: var(--font-color)
     padding-left: 0.25rem
     padding-right: 0.25rem
-    border: 1px solid white
+    border: 1px solid var(--primary)
+    border-radius: var(--border-rad)
 
 
 .center
@@ -298,17 +300,43 @@ pre
     line-height: var(--s-1)
     position: relative
     margin-bottom: 0.5rem
+    color: var(--font-color)
     
 
 .holo
     background: aqua
     background-color: rgba(123, 208,246 , 1)
     background: url('/@root/public/images/signal.svg')
-    animation: var(--animation) 1s infinite forwards
+    background-size: 0.5rem
+    animation: var(--animation) 0.5s infinite forwards linear
     transform: scale3d(0)
     box-shadow: inset 1px 1px 25px rgba(123, 208,246,0.5 )
-    
     backdrop-filter: blur(10px) hue-rotate(45deg)
+
+@supports not ( ( -webkit-backdrop-filter: blur(9px) ) or ( backdrop-filter: blur(9px) ) ) 
+  .holo
+   
+
+.holo-overlay
+    position: relative
+    box-shadow: inset 1px 1px 25px rgba(123, 208,246,0.5 )
+    filter: hue-rotate(45deg)
+    
+    &::after
+        content: ""
+        background: url('/@root/public/images/signal.svg') 
+        box-shadow: inset 1px 1px 25px cyan
+        background-size: 0.5rem
+        position: absolute
+        top: 0
+        left: 0
+        width: 100%
+        height: 100%
+
+.holo-overlay.post
+    img
+        max-height: 20rem
+        object-fit: cover
 
 
 @keyframes slider

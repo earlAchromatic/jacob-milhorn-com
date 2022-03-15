@@ -3,7 +3,7 @@
     <div class="blocks">
       <div
         v-for="(num, j) in nums"
-        class="block"
+        class="block holo-overlay"
         :style="{
           background: `var(--bg), var(--color-${
             nums - j
@@ -31,7 +31,7 @@
     <div class="blocks">
       <div
         v-for="(num, j) in nums"
-        class="block"
+        class="block holo-overlay"
         :style="{
           background: `var(--bg), var(--color-${
             nums - j
@@ -52,7 +52,7 @@ const props = defineProps(['postUrl']);
 #cusdis_thread
   bottom: 0
   position: relative
-  clip-path: inset(0 0 3% 0)
+  //clip-path: inset(0 0 3% 0)
   max-width: var(--measure)
   iframe
     box-shadow: none
@@ -97,4 +97,9 @@ figure
   .block
     position: sticky
     top: 10rem
+
+@media screen and ( max-width: 800px )
+  .holo-overlay
+    &::after
+        box-shadow: inset 1px 1px 2px cyan
 </style>

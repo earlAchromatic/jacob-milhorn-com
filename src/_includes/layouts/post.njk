@@ -16,6 +16,7 @@ layout: layouts/base.njk
 {"title": "{{post.title}}", 
   "url": "{{post.url}}", 
   "excerpt": "{{post.excerpt | safe}}", 
+  "feature_image": "{{post.feature_image}}",
   "tags":[ {% for tag in post.tags %}
     "{{tag}}" 
     {% if not loop.last %},{% endif %}
