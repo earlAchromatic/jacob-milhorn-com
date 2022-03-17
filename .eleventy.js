@@ -19,7 +19,7 @@ module.exports = function (eleventyConfig) {
   if (process.env.ELEVENTY_BUILD_OUTPUT_DIR) {
     eleventyConfig.addPlugin(localImages, {
       distPath: process.env.ELEVENTY_BUILD_OUTPUT_DIR,
-      assetPath: '/images/remote',
+      assetPath: '/assets/',
       selector: 'img',
       verbose: false,
     });

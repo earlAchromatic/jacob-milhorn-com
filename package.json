@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "slinkity --serve --incremental",
     "start": "slinkity --watch --incremental",
-    "build": "DEBUG=true slinkity"
+    "build": "slinkity && node replace.mjs"
   },
   "devDependencies": {
     "@11ty/eleventy": "^1.0.0",
@@ -24,6 +24,9 @@
   "dependencies": {
     "@vueuse/core": "^7.6.2",
     "@vueuse/sound": "^1.1.7",
+    "any-shell-escape": "^0.1.1",
+    "datauri": "^4.1.0",
+    "ffmpeg-static": "^5.0.0",
     "lodash": "^4.17.21",
     "lodash-es": "^4.17.21",
     "vite": "^2.8.6"
