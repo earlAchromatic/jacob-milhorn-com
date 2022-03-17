@@ -21,7 +21,7 @@
 <script setup>
 import { onMounted, ref, watch } from 'vue';
 
-import { addProperties, colors, setFontColor } from '/@root/scripts/color.js';
+import { addProperties, colors } from '/@root/scripts/color.js';
 
 onMounted(() => {
   myStorage = window.localStorage;

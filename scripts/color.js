@@ -20,10 +20,6 @@ export const makeStyleArray = (colorArray) => {
   });
 };
 
-export const setFontColor = (colors) => {
-  document.documentElement.style.setProperty('--font-color', colors.textColor);
-};
-
 export const setFontColors = (bool, color) => {
   if (bool) {
     document.documentElement.style.setProperty(
