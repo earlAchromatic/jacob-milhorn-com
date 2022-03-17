@@ -13,7 +13,7 @@ layout: layouts/base.njk
 {% set postDat %}
 [
 {% for post in collections.posts %}
-{"title": "{{post.title}}", 
+{"title": "{{post.title | safe}}", 
   "url": "{{post.url}}", 
   "excerpt": "{{post.excerpt | safe}}", 
   "feature_image": "{{post.feature_image}}",
