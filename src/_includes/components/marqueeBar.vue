@@ -12,24 +12,8 @@
             placeholder="Enter Your Name"
           />
         </div>
-        <colorChanger />
-        <!-- <button
-          class="accessibility"
-          @click="toggleAccessibility"
-          v-show="!accessible"
-        >
-          Holographic Animation Off
-          <span>(recommended for mobile)</span>
-        </button>
-        <button
-          class="accessibility"
-          @click="toggleAccessibility"
-          v-show="accessible"
-        >
-          Holographic Animation On
-        </button> -->
-      </div></Transition
-    >
+        <colorChanger /></div
+    ></Transition>
 
     <div id="generator" @click="showit">
       <img v-show="!show" src="/images/holo-off.png" alt="" />
@@ -45,9 +29,6 @@ import { throttle } from 'lodash';
 
 onMounted(() => {
   myStorage = window.localStorage;
-  //accessible.value = JSON.parse(myStorage.getItem('accessible')) ?? false;
-  //setAccessible();
-
   let showBar = myStorage.getItem('bar');
   if (showBar == 'true') {
     shouldTransition.value = false;
@@ -72,7 +53,6 @@ onMounted(() => {
   }, 1500);
 });
 
-//const accessible = ref(false);
 const shouldTransition = ref(true);
 const show = ref();
 const userName = ref('');
@@ -90,14 +70,6 @@ const showit = () => {
 const onAfterEnter = (env) => {
   env.style.width = '100%';
 };
-
-// const setAccessible = () => {
-//   if (accessible.value) {
-//     document.documentElement.style.setProperty('--animation', 'none');
-//   } else {
-//     document.documentElement.style.setProperty('--animation', 'slider');
-//   }
-// };
 
 function replace(element, from, to) {
   if (element.childNodes.length) {
@@ -129,13 +101,7 @@ const throttledStoreUserName = throttle(() => {
 
 const Replace = () => {
   let regex = new RegExp(/\s+/);
-  //   console.log(`testing ${userName.value} against ${tempUsername.value}\n`);
-  //   console.log(`
-  //     tempuserName no spaces: ${!regex.test(tempUsername.value.trim())}\n
-  //     username no spaces: ${!regex.test(userName.value.trim())}\n
-  //     tempUsername not empty: ${tempUsername.value !== ''}\n
-  //     username not empty: ${userName.value != ''}
-  // `);
+
   if (
     !regex.test(tempUsername.value) &&
     !regex.test(userName.value) &&
@@ -153,14 +119,6 @@ const replaceFellowHuman = (from) => {
     replace(el, from, userName.value);
   });
 };
-
-// const toggleAccessibility = () => {
-//   console.log(accessible.value);
-
-//   accessible.value = !accessible.value;
-//   setAccessible();
-//   myStorage.setItem('accessible', accessible.value);
-// };
 </script>
 
 <style lang="sass">
