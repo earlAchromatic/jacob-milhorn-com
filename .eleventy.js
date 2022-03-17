@@ -1,8 +1,6 @@
 const syntaxHighlight = require('@11ty/eleventy-plugin-syntaxhighlight');
 const ghostContentAPI = require('@tryghost/content-api');
 const localImages = require('eleventy-plugin-local-images');
-const { JSDOM } = require('jsdom');
-const path = require('path');
 require('dotenv').config();
 
 const api = new ghostContentAPI({
@@ -17,12 +15,18 @@ const stripDomain = (url, precursor = '') => {
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(syntaxHighlight);
-  eleventyConfig.addPlugin(localImages, {
-    distPath: '_site', //https://github.com/slinkity/slinkity/issues/74
-    assetPath: '/public/images',
-    selector: 'img',
-    verbose: false,
-  });
+
+  if (process.env.ELEVENTY_BUILD_OUTPUT_DIR) {
+    eleventyConfig.addPlugin(localImages, {
+      distPath: process.env.ELEVENTY_BUILD_OUTPUT_DIR,
+      assetPath: '/images/remote',
+      selector: 'img',
+      verbose: false,
+    });
+  }
+
+  //eleventyConfig.addNunjucksAsyncShortcode('image', imageShortcode);
+
   /**
    * Why copy the /public directory?
    *
