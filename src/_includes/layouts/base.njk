@@ -5,7 +5,76 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="/images/letter-j.png" />
-    <title>{{title}}</title>
+        <title>
+            {%- if title -%}
+                {{ title | safe}}
+                
+            {%- else -%}
+                {{ metadata.title }} – {{ metadata.description }}
+            {%- endif -%}
+        </title>
+        <meta name="description" content=
+        "{% if descr %}{{ descr | safe }}{% else %}{{ metadata.description }}{% endif %}">
+    {% if post %}
+    {% set title = post.title %}
+        {%- block seo -%}   
+            {% if post.canonical_url %}
+                <link rel="canonical" href="{{post.canonical_url}}"/>
+            {% else %}
+                <link rel="canonical" href="{{ metadata.url }}{{canonicalUrl or page.url}}">
+            {% endif %}
+
+            <!--Twitter Card-->
+            <meta name="twitter:site" content="{{ metadata.twitter }}">
+            <meta name="twitter:creator" content="{{ post.primary_author.twitter }}">
+            <meta name="twitter:card" content="summary_large_image">
+            <meta name="twitter:url" content="{{ metadata.url + page.url }}">
+            <meta name="twitter:title" content="{{ title }} – {{ metadata.title }}">
+            <meta name="twitter:description" content="{{ post.excerpt }}">
+            <meta name="twitter:image" content="{{ post.feature_image }}">
+
+            <!--Schema-->
+            <link rel="author" href="{{ metadata.url }}">
+            <link rel="publisher" href="{{ metadata.url }}">
+            <meta itemprop="name" content="{{ title }} – {{ metadata.title }}">
+            <meta itemprop="description" content="{{ post.excerpt }}">
+            <meta itemprop="image" content="{{ post.feature_image }}">
+
+            <!-- Facebook OpenGraph -->
+            <meta property="og:url" content="{{ metadata.url + page.url }}">
+            <meta property="og:type" content="webmetadata">
+            <meta property="og:title" content="{{ title }} – {{ metadata.title }}">
+            <meta property="og:image" content="{{ post.feature_image }}">
+            <meta property="og:description" content="{{ post.excerpt }}">
+            <meta property="og:metadata_name" content="{{ metadata.title }}">
+            <meta property="og:locale" content="{{ metadata.lang }}">
+            <meta property="article:author" content="{{ metadata.url }}">
+        {%- endblock -%}
+        {% else %}
+        {%- block page -%}
+        <link rel="canonical" href="{{ metadata.url }}{{ canonicalUrl or page.url }}">
+                <!--Schema-->
+                <link rel="author" href="{{ metadata.url }}">
+                <link rel="publisher" href="{{ metadata.url }}">
+                <meta itemprop="name" content="{% if title %}{{ title | safe }}{% else %}{{ metadata.title }}{% endif %}">
+                <meta itemprop="description" content="{% if descr %}{{ descr | safe }}{% else %}{{ metadata.description }}{% endif %}">
+                <meta itemprop="image" content="{{ metadata.url + metadata.cover_image }}">
+                <meta property="og:image" content="{{ metadata.url + metadata.cover_image }}">
+        {%- endblock -%}
+    {% endif %}
+
+    {% if GoogleAnalytics() %}
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{GoogleAnalytics()}}"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', '{{GoogleAnalytics()}}');
+        </script>
+    <!-- Adds section observers that fire Gtag events -->
+    {% endif %}
     <link
       rel="preload"
       href="/fonts/Atkinson/Atkinson-Hyperlegible-Regular.woff2"

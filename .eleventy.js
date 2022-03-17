@@ -56,22 +56,11 @@ module.exports = function (eleventyConfig) {
     return collection;
   });
 
-  // eleventyConfig.addNunjucksFilter('updatePretagSyntaxHighlight', (html) => {
-  //   let dom = new JSDOM(html);
-  //   const codeEls = dom.window.document.querySelectorAll('code');
-
-  //   Object.entries(codeEls).forEach((codeTag) => {
-  //     //console.log(codeTag[1].parentElement.tagName);
-  //     if (codeTag[1].parentElement.tagName === 'PRE') {
-  //       let parentPre = codeTag[1].parentElement;
-  //       let codeTagClass = codeTag[1].className;
-  //       console.log(codeTagClass);
-  //       parentPre.setAttribute('class', codeTagClass);
-  //     }
-  //   });
-
-  //   return dom.serialize();
-  // });
+  eleventyConfig.addNunjucksGlobal('GoogleAnalytics', function () {
+    if (process.env.GA_KEY !== 'false' && process.env.GA_KEY !== 'null') {
+      return process.env.GA_KEY;
+    } else return;
+  });
 
   eleventyConfig.addPassthroughCopy('public');
 

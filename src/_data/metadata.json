@@ -1,0 +1,27 @@
+{
+  "title": "Jacob Milhorn Dot Com",
+  "url": "https://jacobmilhorn.com",
+  "domain": "jacobmilhorn.com",
+  "iconPath": "/images/letter-j.svg",
+  "description": "Creativity, Technology, Business. That's my Venn Diagram.",
+  "genre": "Insert a schema.org genre",
+  "googleAnalyticsId": "",
+  "cover_image": "/images/letter-j.svg",
+  "feed": {
+    "subtitle": "Jacob Milhorn.",
+    "filename": "feed.xml",
+    "path": "/feed/feed.xml",
+    "id": ""
+  },
+  "jsonfeed": {
+    "path": "/feed/feed.json",
+    "url": "https://update-me.com/feed/feed.json"
+  },
+  "author": {
+    "name": "Jacob",
+    "twitterHandle": "@earlAchromatic"
+  },
+  "publisher": {
+    "name": "Hyperion Web Publishing"
+  }
+}

@@ -125,7 +125,7 @@ export default {};
   img
     object-fit: cover
     margin: 0
-    max-height: 10rem
+    height: 10rem
     width: 100%
     max-width: none
 
