@@ -110,7 +110,7 @@
 </head>
 <body dsd-pending class="HC">
 
-{% component 'components/header.vue'%}
+{% component 'components/Header.vue'%}
 {% component 'components/marqueeBar.vue', hydrate='eager'%}
 <a class="phone-home" href="/">
   <img class="bg" src="/images/holo-on.png" alt="" />
@@ -125,7 +125,6 @@
   {{content | safe}}
   </div>
     
-<script type="module" src="/@root/scripts/highContrast.js"></script>
 <script type="module">
   import {addProperties, colors, setFontColors} from "/@root/scripts/color.js"
   
