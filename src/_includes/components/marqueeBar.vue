@@ -25,7 +25,7 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import colorChanger from './colorChanger.vue';
-import { throttle } from 'lodash';
+import { debounce } from 'lodash';
 
 onMounted(() => {
   myStorage = window.localStorage;
@@ -82,32 +82,30 @@ function replace(element, from, to) {
 
 const getFellowHumanEls = () => {
   let humanEls = [];
-  const els = document.querySelector('astro-fragment').querySelectorAll('*');
+  let els;
+  if (document.querySelector('.mat')) {
+    els = document.querySelector('.mat').querySelectorAll('p'); //total hack, okay.
+  } else {
+    els = document.querySelector('astro-fragment').querySelectorAll('*');
+  }
+
   els.forEach((el) => {
     if (el.textContent.includes('Fellow Human')) {
       humanEls.push(el);
     }
   });
-
+  console.log(humanEls);
   return humanEls;
 };
 
-const throttledStoreUserName = throttle(() => {
-  {
-    Replace();
-    myStorage.setItem('username', userName.value);
-  }
-}, 300);
+const throttledStoreUserName = debounce(() => {
+  Replace();
+  myStorage.setItem('username', userName.value);
+}, 1000);
 
 const Replace = () => {
-  let regex = new RegExp(/\s+/);
-
-  if (
-    !regex.test(tempUsername.value) &&
-    !regex.test(userName.value) &&
-    tempUsername.value !== '' &&
-    userName.value != ''
-  ) {
+  if (tempUsername.value !== '' && userName.value != '') {
+    console.log(`replacing ${tempUsername.value} with ${userName.value}`);
     replaceFellowHuman(tempUsername.value);
     tempUsername.value = userName.value;
   }
@@ -115,7 +113,6 @@ const Replace = () => {
 
 const replaceFellowHuman = (from) => {
   fellowHumanEls.value.forEach((el) => {
-    console.log(`replacing: ${from} with ${userName.value} at ${el}`);
     replace(el, from, userName.value);
   });
 };

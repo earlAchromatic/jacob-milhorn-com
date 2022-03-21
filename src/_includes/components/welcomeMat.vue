@@ -1,5 +1,5 @@
 <template>
-  <div class="mat HC">
+  <div class="mat">
     <img src="/images/letter-j.svg" alt="" />
     <div>
       <p>
@@ -13,10 +13,15 @@
       </p>
 
       <h2 class="text-center">Want to get in touch?</h2>
-      jacob@hyperionweb.dev |
-      <a href="https://github.com/earlAchromatic" nofollow
+      <a href="mailto:jacob.milhorn@gmail.com">jacob.milhorn@gmail.com</a>
+      |
+      <a href="https://github.com/earlAchromatic" target="_blank"
         >github.com/earlAchromatic</a
-      >| Discord: hyperguy#1660
+      >
+      |
+      <a href="https://discordapp.com/users/hyperguy#1660/" target="_blank">
+        Discord: hyperguy#1660</a
+      >
     </div>
   </div>
 </template>
@@ -42,4 +47,6 @@
       padding: 2rem
     .text-center
       text-align: center
+    a
+      border-bottom-color: aqua
 </style>
