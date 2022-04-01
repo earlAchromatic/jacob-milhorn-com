@@ -49,7 +49,6 @@
 </template>
 
 <script setup>
-import Section from './Section.vue';
 import TagRender from './TagRender.vue';
 import gridFilter from './gridFilter.vue';
 import { ref, computed, onMounted } from 'vue';
