@@ -6,11 +6,6 @@
   </nav>
 </template>
 
-<script setup>
-import marqueeBar from './marqueeBar.vue';
-import { ref } from 'vue';
-</script>
-
 <style lang="sass">
 nav
   pointer-events: none
