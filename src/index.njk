@@ -24,6 +24,5 @@ layout: layouts/base.njk
 
 
 
-{% slottedComponent 'components/Section.vue' %}
-    {% component 'components/postsGrid.vue', posts=postDat, hydrate="lazy" %}
-{% endslottedComponent %}
+
+    {% component 'components/postsGrid.vue', posts=postDat, hydrate="onClientIdle" %}

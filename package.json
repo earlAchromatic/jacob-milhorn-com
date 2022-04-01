@@ -18,7 +18,7 @@
     "eleventy-plugin-local-images": "^0.4.1",
     "jsdom": "^19.0.0",
     "sass": "^1.49.8",
-    "slinkity": "^0.6.4",
+    "slinkity": "^0.7.0",
     "vue": "^3.2.31"
   },
   "dependencies": {
