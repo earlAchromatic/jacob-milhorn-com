@@ -22,6 +22,8 @@
       <a href="https://discordapp.com/users/hyperguy#1660/" target="_blank">
         Discord: hyperguy#1660</a
       >
+      |
+      <a href="/Jacob Milhorn Resume 2022.pdf">CV</a>
     </div>
   </div>
 </template>
