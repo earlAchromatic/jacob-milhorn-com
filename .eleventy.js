@@ -9,9 +9,9 @@ const api = new ghostContentAPI({
   version: 'v2',
 });
 
-const stripDomain = (url, precursor = '') => {
-  return url.replace(process.env.GHOST_API_URL, precursor);
-};
+// const stripDomain = (url, precursor = '') => {
+//   return url.replace(process.env.GHOST_API_URL, precursor);
+// };
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(syntaxHighlight);
@@ -62,7 +62,7 @@ module.exports = function (eleventyConfig) {
     } else return;
   });
 
-  eleventyConfig.addPassthroughCopy('public');
+  
 
   return {
     /**
